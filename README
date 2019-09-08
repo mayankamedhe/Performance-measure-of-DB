@@ -1,0 +1,19 @@
+README-
+
+To compile- 
+gcc -o benchmark file.c page.c
+
+To run-
+benchmark -p page_size -s record_size -i insert_number_of_records -n scan_length -d number_of_records_to_delete [-r]
+
+Example-
+To run for page size 4096, record size 8, number of records to be inserted 10000000, scan length 100, number of records to be deleted 10 and using sequential read-
+
+benchmark -p 4096 -s 8 -i 10000000 -n 100 -d 10
+
+Similarly for random read add flag -r as shown below-
+
+benchmark -p 4096 -s 8 -i 10000000 -n 100 -d 10 -r
+
+Lynus Vaz -301385265
+Mayanka Medhe - 301389943

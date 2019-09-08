@@ -1,0 +1,31 @@
+CMPT 740 Assignment 1: Storage
+- Lynus Vaz, Mayanka Medhe
+
+1. Testing Environment
+	• CPU model: AMD A8-7410 APU with AMD Radeon R5 Graphics
+	• Memory size: 6.8G
+	• Type of storage device: hard disk
+2. Methodology
+	To evaluate the performance we used clock gettime with CLOCK REALTIME flag which gives us results
+	with nanoseconds precision. For random read, we generated 1000 random page ids and slot ids using rand()
+	function making sure both page id and slot id were valid and combined them to get the RID. For sequential
+	reads, we generated the starting RID in a similar manner and read the next 100 records. For deletion, we
+	tested both runs on random RIDs. We generated RIDs in the same way as mentioned above. The value of
+	the record is a string set in a sequential manner starting from 0. We used direct file read and write 
+	(using O_DIRECT) in order to bypass the OS buffer cache. Also, we are writing the page to disk when it is filled.
+3. Result
+	3.1 Sequential Read
+		Page size: 4KB
+		Record size: 8 bytes
+		Scan length: 100
+		Delete: 100
+		In sequential read test case, insertion of 10000000 took 2676 sec 975366592 nsec. The total time taken
+		to read 100 records is 0 sec 20827700 nsec and to delete 100 is 7 sec 30753548 nsec. Therefore, the average
+		insert is 3735 records/sec average sequential read is 4801 records/sec and average delete is 14 records/sec.
+	3.2 Random Read
+		Page size: 16KB
+		Record size: 64 bytes
+		Scan length: 1000
+		Delete: 50
+		In random read test case, insertion of 10000000 took 2728 sec 719789491 nsec. The total time taken to read 1000 records
+		is 9 sec 537496684 nsec and to delete 50 is 3 sec 291913823 nsec. Therefore, the average insert is 3664, average random read is 104 records/sec and average delete is 15 records/sec.
